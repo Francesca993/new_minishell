@@ -1,0 +1,7 @@
+leaks --atExit -- ./minishell
+
+minishell$: cd header
+minishell$: /bin/grep include minishell.h
+minishell: /bin/grep: No such file or directory
+minishell$: cd ..
+minishell$: /bin/echo hello
