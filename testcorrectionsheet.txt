@@ -114,7 +114,7 @@
 - cd .. → pwd
 - pwd → pwd → pwd
 
-## BLOCCO 14 — RELATIVE PATH 
+## BLOCCO 14 — RELATIVE PATH ✅
 - cd /bin → ./ls
 - cd / → ./bin/ls
 - cd /bin → ../bin/ls
@@ -122,7 +122,7 @@
 - cd /bin → ./nonexistent
 - cd /; cd usr; cd ..; ./bin/ls
 
-## BLOCCO 15 — ENVIRONMENT PATH
+## BLOCCO 15 — ENVIRONMENT PATH ✅
 - ls
 - unset PATH → ls
 - export PATH=/bin → ls
@@ -131,16 +131,16 @@
 - export PATH=[default value]
 
 ## BLOCCO 16 — REDIRECTIONS
-- echo "hello world" > test1.txt → cat test1.txt
-- cat < test1.txt
-- echo "second line" >> test1.txt → cat test1.txt
-- cat < file1 < file2
+- echo "hello world" > test1.txt → cat test1.txt ✅
+- cat < test1.txt 
+- echo "second line" >> test1.txt → cat test1.txt ✅
+- cat < file1 < file2 ❌ CRASH❌
 - cat < test1.txt > test2.txt → cat test2.txt
-- cat << EOF ... EOF
-- grep hello << END ... END
-- ls > out.txt → wc < out.txt
-- cat < file_che_non_esiste.txt
-- echo hello>file.txt → cat<file.txt
+- cat << EOF ... EOF ✅
+- grep hello << END ... END ✅
+- ls > out.txt → wc < out.txt ✅
+- cat < file_che_non_esiste.txt ❌
+- echo hello>file.txt → cat<file.txt ✅
 
 ## BLOCCO 17 — PIPES
 
