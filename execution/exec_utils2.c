@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 08:01:34 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/07 08:51:02 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/16 16:45:15 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,4 @@ void	exec_with_env_path(t_cmd *cmd, char **env)
 	perror("execve");
 	free(path);
 	exit(1);
-}
-
-void	wait_all(pid_t *pids, int n_cmds)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < n_cmds)
-		waitpid(pids[i++], &status, 0);
-	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
-	else
-		g_exit_status = 1;
 }
