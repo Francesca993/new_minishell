@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:22 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/13 09:54:47 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 16:42:58 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,22 @@ int	fork_and_exec(t_pipeline *pipeline, int i, int **pipes, pid_t *pids)
 		execute_cmd(pipeline, i, pipes);
 	}
 	return (0);
+}
+
+void	wait_all(pid_t *pids, int n_cmds)
+{
+	int	 i;
+	int	 status;
+
+	i = 0;
+	while (i < n_cmds)
+		waitpid(pids[i++], &status, 0);
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_exit_status = 128 + WTERMSIG(status);
+	else
+		g_exit_status = 1;
 }
 
 void	execute_pipeline(t_pipeline *pipeline)
