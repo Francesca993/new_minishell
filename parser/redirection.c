@@ -6,43 +6,87 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 16:06:07 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/13 09:29:31 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 17:39:52 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
+// int	setup_redir_in(t_cmd *cmd)
+// {
+// 	int	fd;
+
+// 	fd = open(cmd->infile, O_RDONLY);
+// 	if (fd < 0)
+// 		return (perror("open <"), -1);
+// 	cmd->fd_in = fd;
+// 	cmd->redir_in = 1;
+// 	return (0);
+// }
 int	setup_redir_in(t_cmd *cmd)
 {
-	int	fd;
+	int		fd;
+	char	*no_quotes;
 
-	fd = open(cmd->infile, O_RDONLY);
+	if (cmd->fd_in > 0)
+		close(cmd->fd_in);
+	no_quotes = strip_outer_quotes(cmd->infile);
+	fd = open(no_quotes, O_RDONLY);
+	free(no_quotes);
 	if (fd < 0)
-		return (perror("open <"), -1);
+		return (perror(cmd->infile), -1);
 	cmd->fd_in = fd;
 	cmd->redir_in = 1;
 	return (0);
 }
 
+// int	setup_redir_out(t_cmd *cmd)
+// {
+// 	int	fd;
+
+// 	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	if (fd < 0)
+// 		return (perror("open >"), -1);
+// 	cmd->fd_out = fd;
+// 	cmd->redir_out = 1;
+// 	return (0);
+// }
 int	setup_redir_out(t_cmd *cmd)
 {
-	int	fd;
+	int		fd;
+	char	*no_quotes;
 
-	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	no_quotes = strip_outer_quotes(cmd->outfile);
+	fd = open(no_quotes, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	free(no_quotes);
 	if (fd < 0)
-		return (perror("open >"), -1);
+		return (perror(cmd->outfile), -1);
 	cmd->fd_out = fd;
 	cmd->redir_out = 1;
 	return (0);
 }
 
+
+// int	setup_redir_append(t_cmd *cmd)
+// {
+// 	int	fd;
+
+// 	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
+// 	if (fd < 0)
+// 		return (perror("open >>"), -1);
+// 	cmd->fd_out = fd;
+// 	cmd->append = 1;
+// 	return (0);
+// }
 int	setup_redir_append(t_cmd *cmd)
 {
 	int	fd;
-
-	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	char *no_quotes;
+	
+	no_quotes = strip_outer_quotes(cmd->outfile);
+	fd = open(no_quotes, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
-		return (perror("open >>"), -1);
+		return (perror(cmd->outfile), -1);
 	cmd->fd_out = fd;
 	cmd->append = 1;
 	return (0);

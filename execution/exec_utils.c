@@ -3,17 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:13:09 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/07 07:25:01 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/16 17:37:01 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	set_redirections(t_cmd *cmd)
+int	set_redirections(t_cmd *cmd)
 {
+	if (cmd->redir_in && cmd->fd_in == -1)
+		return (-1);
+	if (cmd->redir_out && cmd->fd_out == -1)
+		return (-1);
+	if (cmd->heredoc && cmd->fd_in == -1)
+		return (-1);
+	if (cmd->append && cmd->fd_out == -1)
+		return (-1);
 	if (cmd->redir_in && cmd->fd_in != -1)
 		dup2(cmd->fd_in, STDIN_FILENO);
 	if (cmd->redir_out && cmd->fd_out != -1)
@@ -22,6 +30,7 @@ void	set_redirections(t_cmd *cmd)
 		dup2(cmd->fd_in, STDIN_FILENO);
 	if (cmd->append && cmd->fd_out != -1)
 		dup2(cmd->fd_out, STDOUT_FILENO);
+	return(0);
 }
 
 static void	ft_free_matrix(char **matrix)

@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:45:03 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/07 11:44:54 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 17:36:24 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		process_args(t_cmd *cmd);
 // EXECUTE PIPELINE
 // ==============================
 void	execute_pipeline(t_pipeline *pipeline);
-void	set_redirections(t_cmd *cmd);
+int 	set_redirections(t_cmd *cmd);
 char	*find_path(char **envp);
 char	*check_path(char *env_path, char *cmd);
 int		setup_redir_in(t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:18:25 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/07 12:15:49 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 17:38:11 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void	handle_command_redirection(t_pipeline *p, t_cmd *cmd, int *i)
 		return ;
 	if (type == REDIR_IN)
 	{
+		if (cmd->infile)
+			free(cmd->infile);
 		cmd->infile = ft_strdup(p->tokens[++(*i)]);
 		cmd->redir_in = 1;
 	}
