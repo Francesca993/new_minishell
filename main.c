@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:58:21 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/13 09:15:45 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 17:04:15 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ void	minishell_loop(char ***env)
 
 	pipeline = NULL;
 	processing = 1;
+	signal(SIGQUIT, SIG_IGN); // Ignora SIGQUIT di default (prompt vuoto)
 	while (processing == 1)
 	{
+		signal(SIGQUIT, handle_sigquit); // Attiva handler solo durante input
 		line = readline("minishell$: ");
+		signal(SIGQUIT, SIG_IGN);        // Ignora dopo input
 		if (!line)
 		{
 			exit_shell(0, NULL);

@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:22 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/16 16:42:58 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/16 16:57:14 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ void	wait_all(pid_t *pids, int n_cmds)
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
+	{
 		g_exit_status = 128 + WTERMSIG(status);
+		if (WTERMSIG(status) == SIGQUIT)
+			exit(131); // <-- Chiudi la shell se il figlio è terminato da SIGQUIT
+	}
 	else
 		g_exit_status = 1;
 }
