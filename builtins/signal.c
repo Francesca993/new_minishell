@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:50:36 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/16 17:07:02 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/17 15:40:16 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,19 @@ Se un processo è attivo, di solito lo termina con core dump.
 void	handle_sigquit(int signo)
 {
 	(void)signo;
-	if (rl_line_buffer && rl_line_buffer[0] != '\0') {
+	if (rl_line_buffer && rl_line_buffer[0] != '\0')
+	{
 		g_exit_status = 131;
 		write(1, "Quit (core dumped)\n", 18);
 		exit(131);
 	}
-	// Se la riga è vuota, ignora SIGQUIT
 }
 
+//SIGQUIT ignorato nella shell principale
 void	init_signals(void)
 {
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN); // <-- SIGQUIT ignorato nella shell principale
+	signal(SIGQUIT, SIG_IGN);
 }
 
 /*

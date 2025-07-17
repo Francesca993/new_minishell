@@ -6,7 +6,7 @@
 #    By: francesca <francesca@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/29 12:20:24 by francesca         #+#    #+#              #
-#    Updated: 2025/07/17 14:01:15 by francesca        ###   ########.fr        #
+#    Updated: 2025/07/17 15:42:41 by francesca        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,4 +102,9 @@ re: fclean all
 valgrind: $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=supp.supp ./$(NAME)
 
-.PHONY: all clean fclean re
+NORM_FILES = main.c parser/ env/ execution/ builtins/ header/
+
+norminette:
+	norminette $(NORM_FILES)
+
+.PHONY: all clean fclean re norminette

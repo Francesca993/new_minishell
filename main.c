@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:58:21 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/16 17:04:15 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/17 15:37:46 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** Variabile globale usata per memorizzare lo stato di uscita della shell.
 ** - Aggiornata dopo l'esecuzione di ogni comando (per supportare $?)
-** Modificata anche dai signal handler per riflettere l'interruzione 
+** Modificata anche dai signal handler per riflettere l'interruzione
 ** da segnali (es. Ctrl-C → 130)
 **
 ** Conforme al subject:
@@ -27,20 +27,36 @@
 
 volatile sig_atomic_t	g_exit_status = 0;
 
-void	minishell_loop(char ***env)
+static int	process_input_line(char *line, char ***env)
 {
-	char		*line;
 	t_pipeline	*pipeline;
 	int			processing;
 
 	pipeline = NULL;
 	processing = 1;
-	signal(SIGQUIT, SIG_IGN); // Ignora SIGQUIT di default (prompt vuoto)
+	if (*line)
+		add_history(line);
+	pipeline = parse_line(line, *env, pipeline);
+	if (!pipeline)
+		return (processing);
+	if (pipeline->cmds[0] != NULL)
+		processing = process_pipeline(pipeline, env);
+	free_pipeline(pipeline);
+	return (processing);
+}
+
+void	minishell_loop(char ***env)
+{
+	char	*line;
+	int		processing;
+
+	processing = 1;
+	signal(SIGQUIT, SIG_IGN);
 	while (processing == 1)
 	{
-		signal(SIGQUIT, handle_sigquit); // Attiva handler solo durante input
+		signal(SIGQUIT, handle_sigquit);
 		line = readline("minishell$: ");
-		signal(SIGQUIT, SIG_IGN);        // Ignora dopo input
+		signal(SIGQUIT, SIG_IGN);
 		if (!line)
 		{
 			exit_shell(0, NULL);
@@ -52,18 +68,7 @@ void	minishell_loop(char ***env)
 			free(line);
 			continue ;
 		}
-		if (*line)
-			add_history(line);
-		pipeline = parse_line(line, *env, pipeline);
-		if (!pipeline)
-		{
-			free(line);
-			continue ;
-		}
-		if (pipeline && pipeline->cmds[0] != NULL)
-			processing = process_pipeline(pipeline, env);
-		if (pipeline)
-			free_pipeline(pipeline);
+		processing = process_input_line(line, env);
 		free(line);
 	}
 }
@@ -79,7 +84,6 @@ int	main(int argc, char **argv, char **envp)
 	my_env = copy_env(envp);
 	minishell_loop(&my_env);
 	free_myenvp(my_env);
-//	rl_clear_history();
 	clear_history();
 	return (g_exit_status);
 }
