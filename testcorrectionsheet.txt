@@ -5,7 +5,7 @@
 - [Tab] + Invio
 - /bin/ls → echo $?
 - /bin/nonexistent → echo $?
-- exit 256 → echo $? ❌
+- exit 256 → echo $? 
 
 ## BLOCCO 2 — ARGUMENTS & HISTORY ✅
 - /bin/ls -l
@@ -30,28 +30,28 @@
 - exit
 - exit 0
 - exit 42
-- exit 256 → echo $? ❌
-- exit pippo → echo $?
+- exit 256 → echo $? 
+- exit pippo → echo $? ❌ deve uscire con 2 numeric argument required
 - exit 10 pippo → echo $?
 
 ## BLOCCO 5 — RETURN VALUE OF A PROCESS
 - /bin/ls → echo $?
 - /bin/ls -l → echo $?
-- /bin/echo hello > file.txt → echo $?
+- /bin/echo hellow > file.txt → echo $?
 - /bin/nonexistent → echo $?
 - /bin/ls filethatdoesntexist → echo $?
 - /bin/false → expr $? + $?
 - /bin/ls → /bin/nonexistent → expr $? + $?
-- echo $(expr 2 + 3)
+- echo $(expr 2 + 3)❌
 
-## BLOCCO 6 — SIGNALS ❌
+## BLOCCO 6 — SIGNALS ✅
 - Ctrl-C a prompt vuoto
 - Ctrl-\ a prompt vuoto
 - Ctrl-D a prompt vuoto
 - ls -l (non inviare) → Ctrl-C → Invio
 - echo cia (non inviare) → Ctrl-D
 - echo cia (non inviare) → Ctrl-\
-- cat → Ctrl-C
+- cat → Ctrl-C 
 - cat → Ctrl-\
 - cat → Ctrl-D
 
@@ -130,7 +130,19 @@
 - export PATH=/bin:/tmp → ls
 - export PATH=[default value]
 
-## BLOCCO 17 — PIPES
+## BLOCCO 16 — REDIRECTIONS
+- echo "hello world" > test1.txt → cat test1.txt ✅
+- cat < test1.txt 
+- echo "second line" >> test1.txt → cat test1.txt ✅
+- cat < file1 < file2 ✅
+- cat < test1.txt > test2.txt → cat test2.txt
+- cat << EOF ... EOF ✅
+- grep hello << END ... END ✅
+- ls > out.txt → wc < out.txt ✅
+- cat < file_che_non_esiste.txt ❌
+- echo hello>file.txt → cat<file.txt ✅
+
+## BLOCCO 17 — PIPES  ✅
 
 - cat file.txt | grep hello
 - cat file.txt | grep hello | wc -l
@@ -142,7 +154,7 @@
 - cat file.txt | grep hello > nuovo.txt
 - cat | grep hello → (Ctrl+D dopo input)
 - < file.txt grep hello | sort | uniq > final.txt
-- echo -e "ciao\nciao\nok" | uniq
+- echo -e "ciao\nciao\nok" | uniq 
 - ls | comando_che_non_esiste | wc -l
 
 ## BLOCCO 18 — GO CRAZY & HISTORY
