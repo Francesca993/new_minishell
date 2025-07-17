@@ -6,7 +6,7 @@
 #    By: francesca <francesca@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/29 12:20:24 by francesca         #+#    #+#              #
-#    Updated: 2025/07/12 22:35:42 by francesca        ###   ########.fr        #
+#    Updated: 2025/07/17 14:01:15 by francesca        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRC =	main.c \
 		parser/quote_handling_2.c \
 		parser/backslash.c \
 		parser/exp_var.c \
+		parser/exp_var_2.c \
+		parser/expand_variable.c \
 		parser/redirection.c \
 		execution/args_processing.c \
 		execution/exec_pipeline.c \

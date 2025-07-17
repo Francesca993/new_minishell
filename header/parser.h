@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:54:15 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/13 21:51:21 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/17 13:59:33 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,9 @@ char						*expand_variables(const char *str, char **env);
 void						expand_cmd_variables(t_cmd *cmd, char **env);
 void						expand_pipeline_variables(t_pipeline *pipeline);
 void						check_var(t_pipeline *pipeline);
-
+char						*get_env_value(const char *var_name, char **env);
 int							ft_strcmp(const char *s1, const char *s2);
+int							get_env_value_len(const char *var_name, char **env);
+int							compute_expanded_length(const char *str, char **env);
+
 #endif
