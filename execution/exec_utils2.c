@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 08:01:34 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/16 16:45:15 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:22:50 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ void	exec_with_env_path(t_cmd *cmd, char **env)
 	perror("execve");
 	free(path);
 	exit(1);
+}
+
+void	close_pipes(int **pipes, int n_pipes)
+{
+	int	i;
+
+	i = 0;
+	while (i < n_pipes)
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+		i++;
+	}
 }

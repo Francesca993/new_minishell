@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:22 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/16 16:57:14 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:22:18 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,6 @@ static int	**create_pipes(int n_cmds)
 	return (pipes);
 }
 
-void	close_pipes(int **pipes, int n_pipes)
-{
-	int	i;
-
-	i = 0;
-	while (i < n_pipes)
-	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
-		i++;
-	}
-}
-
 static void	execute_cmd(t_pipeline *pipeline, int i, int **pipes)
 {
 	t_cmd	*cmd;
@@ -58,7 +45,8 @@ static void	execute_cmd(t_pipeline *pipeline, int i, int **pipes)
 	{
 		if (access(cmd->args[0], X_OK) == 0)
 			execve(cmd->args[0], cmd->args, pipeline->my_env);
-		fprintf(stderr, "minishell: %s: No such file or directory\n", cmd->args[0]);
+		fprintf(stderr, "minishell: %s: No such file or directory\n",
+			cmd->args[0]);
 		exit(127);
 	}
 	else
@@ -81,8 +69,8 @@ int	fork_and_exec(t_pipeline *pipeline, int i, int **pipes, pid_t *pids)
 
 void	wait_all(pid_t *pids, int n_cmds)
 {
-	int	 i;
-	int	 status;
+	int	i;
+	int	status;
 
 	i = 0;
 	while (i < n_cmds)
@@ -93,7 +81,7 @@ void	wait_all(pid_t *pids, int n_cmds)
 	{
 		g_exit_status = 128 + WTERMSIG(status);
 		if (WTERMSIG(status) == SIGQUIT)
-			exit(131); // <-- Chiudi la shell se il figlio è terminato da SIGQUIT
+			exit(131);
 	}
 	else
 		g_exit_status = 1;

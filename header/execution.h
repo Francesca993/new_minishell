@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:45:03 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/16 17:36:24 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:22:38 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		process_args(t_cmd *cmd);
 // EXECUTE PIPELINE
 // ==============================
 void	execute_pipeline(t_pipeline *pipeline);
-int 	set_redirections(t_cmd *cmd);
+int		set_redirections(t_cmd *cmd);
 char	*find_path(char **envp);
 char	*check_path(char *env_path, char *cmd);
 int		setup_redir_in(t_cmd *cmd);
