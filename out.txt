@@ -1,0 +1,19 @@
+builtins
+da sistemare.txt
+env
+execution
+file.txt
+header
+Libft
+main.c
+Makefile
+minishell
+ng_3_minishell.pdf
+obj
+out.txt
+parser
+readme.md
+supp.supp
+test1.txt
+test2.txt
+testcorrectionsheet.txt

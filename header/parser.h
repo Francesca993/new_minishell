@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:54:15 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/17 15:43:38 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:39:19 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,11 @@ int							fill_cmds(t_pipeline *pipeline, t_cmd *cmd, int *i);
 void						handle_command_redirection(t_pipeline *p,
 								t_cmd *cmd, int *i);
 t_cmd						*allocate_cmd(t_pipeline *pipeline, int n_args);
+void						exec_here_child(int *pipe_fd, t_cmd *cmd,
+								int exp_var, char *new_del);
+void						read_heredoc(t_cmd *cmd, int write_fd, char *delim,
+								int exp);
+void						handle_exp(char *line, t_cmd *cmd, int write_fd);
 
 // ==============================
 // PARSER

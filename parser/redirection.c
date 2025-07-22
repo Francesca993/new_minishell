@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 16:06:07 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/16 17:39:52 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 16:03:43 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ int	setup_redir_in(t_cmd *cmd)
 	fd = open(no_quotes, O_RDONLY);
 	free(no_quotes);
 	if (fd < 0)
-		return (perror(cmd->infile), -1);
+	{
+		perror(cmd->infile);
+		//free(cmd->pipeline);
+		return (-1);
+	}
+	//dup2(fd, STDIN_FILENO);
+	//close(fd);
 	cmd->fd_in = fd;
 	cmd->redir_in = 1;
 	return (0);
@@ -66,7 +72,6 @@ int	setup_redir_out(t_cmd *cmd)
 	return (0);
 }
 
-
 // int	setup_redir_append(t_cmd *cmd)
 // {
 // 	int	fd;
@@ -80,9 +85,9 @@ int	setup_redir_out(t_cmd *cmd)
 // }
 int	setup_redir_append(t_cmd *cmd)
 {
-	int	fd;
-	char *no_quotes;
-	
+	int		fd;
+	char	*no_quotes;
+
 	no_quotes = strip_outer_quotes(cmd->outfile);
 	fd = open(no_quotes, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
@@ -92,10 +97,9 @@ int	setup_redir_append(t_cmd *cmd)
 	return (0);
 }
 
-static void	read_heredoc(t_cmd *cmd, int write_fd, char *delim, int exp)
+void	read_heredoc(t_cmd *cmd, int write_fd, char *delim, int exp)
 {
 	char	*line;
-	char	*tmp;
 
 	while (1)
 	{
@@ -106,19 +110,7 @@ static void	read_heredoc(t_cmd *cmd, int write_fd, char *delim, int exp)
 			break ;
 		}
 		if (exp)
-		{
-			tmp = expand_variables(line, cmd->pipeline->my_env);
-			if (!tmp)
-			{
-				write(2, "minishell: bad substitution\n", 28);
-				free(line);
-				close(write_fd);
-				exit(1); // blocca il figlio
-			}
-			write(write_fd, tmp, ft_strlen(tmp));
-			write(write_fd, "\n", 1);
-			free(tmp);
-		}
+			handle_exp(line, cmd, write_fd);
 		else
 		{
 			write(write_fd, line, ft_strlen(line));
@@ -143,21 +135,12 @@ int	setup_heredoc(t_cmd *cmd, char *delimiter)
 		return (perror("pipe heredoc"), -1);
 	pid = fork();
 	if (pid == 0)
-	{
-		close(pipe_fd[0]);
-		read_heredoc(cmd, pipe_fd[1], new_del, exp_var);
-		close(pipe_fd[1]);
-		free(new_del);
-		exit(0);
-	}
+		exec_here_child(pipe_fd, cmd, exp_var, new_del);
 	free(new_del);
 	wait(NULL);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-	{
-		close(pipe_fd[0]);
-		return (-1); // heredoc fallito, non continuare
-	}
+		return (close(pipe_fd[0]), -1);
 	close(pipe_fd[1]);
 	cmd->fd_in = pipe_fd[0];
 	cmd->heredoc = 1;

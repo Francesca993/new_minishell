@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 23:22:20 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/16 17:01:50 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:24:28 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int		export_variable(char ***my_env, char **args);
 void	print_export_buildin_sorted(char **my_env);
 int		ft_echo(char **args);
 int		is_builtin(t_cmd *cmd);
-void handle_sigquit(int signo);
+void	handle_sigquit(int signo);
 
 #endif

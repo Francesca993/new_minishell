@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 22:23:22 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/04 22:25:23 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:50:39 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_pipeline(t_pipeline *pipeline)
 	t_cmd	*cmd;
 	int		i;
 
-	if (!pipeline)
+	if (!pipeline || !pipeline->cmds)
 		return ;
 	i = 0;
 	while (i < pipeline->n_cmds)

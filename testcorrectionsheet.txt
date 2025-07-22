@@ -130,6 +130,19 @@
 - export PATH=/bin:/tmp → ls
 - export PATH=[default value]
 
+## BLOCCO 16 — REDIRECTIONS
+
+- echo "hello world" > test1.txt → cat test1.txt
+- cat < test1.txt
+- echo "second line" >> test1.txt → cat test1.txt
+- cat < file1 < file2
+- cat < test1.txt > test2.txt → cat test2.txt
+- cat << EOF ... EOF
+- grep hello << END ... END
+- ls > out.txt → wc < out.txt
+- cat < file_che_non_esiste.txt
+- echo hello>file.txt → cat<file.txt
+
 ## BLOCCO 17 — PIPES
 
 - cat file.txt | grep hello

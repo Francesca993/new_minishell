@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: francesca <francesca@student.42.fr>        +#+  +:+       +#+         #
+#    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/29 12:20:24 by francesca         #+#    #+#              #
-#    Updated: 2025/07/17 15:42:41 by francesca        ###   ########.fr        #
+#    Updated: 2025/07/22 15:29:04 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC =	main.c \
 		parser/exp_var_2.c \
 		parser/expand_variable.c \
 		parser/redirection.c \
+		parser/redir_utils.c \
 		execution/args_processing.c \
 		execution/exec_pipeline.c \
 		execution/exec_utils.c \
