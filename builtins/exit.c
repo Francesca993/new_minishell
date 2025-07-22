@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 22:49:55 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/16 13:51:43 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 15:17:31 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_exit(char **args)
 		write(2, "exit\n", 5);
 		fprintf(stderr, "minishell: exit: %s: numeric argument required\n",
 			args[1]);
-		exit_shell(255, NULL);
+		exit_shell(2, NULL);
 		return (0);
 	}
 	if (args[2])
