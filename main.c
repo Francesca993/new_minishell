@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:58:21 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/22 16:19:14 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 22:22:00 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int argc, char **argv, char **envp)
 	if (isatty(STDIN_FILENO))
 		init_signals();
 	my_env = copy_env(envp);
+	increment_shlvl(&my_env);
 	minishell_loop(&my_env);
 	free_myenvp(my_env);
 	clear_history();

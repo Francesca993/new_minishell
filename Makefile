@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: francesca <francesca@student.42.fr>        +#+  +:+       +#+         #
+#    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/29 12:20:24 by francesca         #+#    #+#              #
-#    Updated: 2025/07/22 17:26:42 by francesca        ###   ########.fr        #
+#    Updated: 2025/07/24 22:20:45 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ OBJ_DIR = obj
 # === Sources ===
 SRC =	main.c \
 		env/init_env.c \
+		env/shell_lvl.c \
 		parser/lexer_utils.c \
 		parser/lexer_utils_2.c \
 		parser/count_token.c \
