@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:13:09 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/22 15:21:16 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/24 22:38:18 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*find_path(char **envp)
 			return (envp[i] + 5);
 		i++;
 	}
-	return (perror("PATH not found"), NULL);
+	return (NULL);
 }
 
 char	*check_path(char *env_path, char *cmd)
