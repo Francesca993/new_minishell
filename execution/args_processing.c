@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:20:58 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/07 07:18:34 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/24 14:35:54 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,17 @@ static int	process_single_cmd(t_pipeline *pipeline, char ***main_env)
 	process_args(pipeline->cmds[0]);
 	old_stdin = dup(STDIN_FILENO);
 	old_stdout = dup(STDOUT_FILENO);
-	set_redirections(pipeline->cmds[0]);
+	if (set_redirections(pipeline->cmds[0]) == -1)
+		return (1);
 	exit = execute_builtin(pipeline->cmds[0], &pipeline->my_env, pipeline);
 	dup2(old_stdin, STDIN_FILENO);
 	dup2(old_stdout, STDOUT_FILENO);
 	close(old_stdin);
 	close(old_stdout);
+	if (pipeline->cmds[0]->fd_in > 0)
+		close(pipeline->cmds[0]->fd_in);
+	if (pipeline->cmds[0]->fd_out > 0)
+		close(pipeline->cmds[0]->fd_out);
 	if (main_env && *main_env != pipeline->my_env)
 		*main_env = pipeline->my_env;
 	return (exit);

@@ -6,23 +6,12 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 16:06:07 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/22 16:03:43 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/24 13:40:42 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-// int	setup_redir_in(t_cmd *cmd)
-// {
-// 	int	fd;
-
-// 	fd = open(cmd->infile, O_RDONLY);
-// 	if (fd < 0)
-// 		return (perror("open <"), -1);
-// 	cmd->fd_in = fd;
-// 	cmd->redir_in = 1;
-// 	return (0);
-// }
 int	setup_redir_in(t_cmd *cmd)
 {
 	int		fd;
@@ -36,27 +25,14 @@ int	setup_redir_in(t_cmd *cmd)
 	if (fd < 0)
 	{
 		perror(cmd->infile);
-		//free(cmd->pipeline);
+		cmd->fd_in = -1;
 		return (-1);
 	}
-	//dup2(fd, STDIN_FILENO);
-	//close(fd);
 	cmd->fd_in = fd;
 	cmd->redir_in = 1;
 	return (0);
 }
 
-// int	setup_redir_out(t_cmd *cmd)
-// {
-// 	int	fd;
-
-// 	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-// 	if (fd < 0)
-// 		return (perror("open >"), -1);
-// 	cmd->fd_out = fd;
-// 	cmd->redir_out = 1;
-// 	return (0);
-// }
 int	setup_redir_out(t_cmd *cmd)
 {
 	int		fd;
@@ -72,17 +48,6 @@ int	setup_redir_out(t_cmd *cmd)
 	return (0);
 }
 
-// int	setup_redir_append(t_cmd *cmd)
-// {
-// 	int	fd;
-
-// 	fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-// 	if (fd < 0)
-// 		return (perror("open >>"), -1);
-// 	cmd->fd_out = fd;
-// 	cmd->append = 1;
-// 	return (0);
-// }
 int	setup_redir_append(t_cmd *cmd)
 {
 	int		fd;

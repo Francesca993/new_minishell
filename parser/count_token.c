@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 09:29:24 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/08 09:40:54 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 14:54:22 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,49 +76,7 @@ int	handle_word_token(const char *line, int *i)
  * Ritorna:
  * - Numero totale di token nella linea
  */
-// int	count_token(const char *line)
-// {
-// 	int	i;
-// 	int	count;
-// 	int	quote;
 
-// 	count = 0;
-// 	quote = 0;
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		while (ft_isspace(line[i]))
-// 			i++;
-// 		if (!line[i])
-// 			break ;
-// 		if (line[i] == '|')
-// 		{
-// 			count++;
-// 			i++;
-// 		}
-// 		else if (line[i] == '<' || line[i] == '>')
-// 		{
-// 			i++;
-// 			if (line[i] == line[i - 1])
-// 				i++;
-// 			count++;
-// 		}
-// 		else
-// 		{
-// 			count++;
-// 			while (line[i] && (quote || (!is_metachar(line[i])
-// 						&& !ft_isspace(line[i]))))
-// 			{
-// 				if ((line[i] == '\'' || line[i] == '"') && !quote)
-// 					quote = line[i];
-// 				else if (line[i] == quote)
-// 					quote = 0;
-// 				i++;
-// 			}
-// 		}
-// 	}
-// 	return (count);
-// }
 int	count_token(const char *line)
 {
 	int	i;

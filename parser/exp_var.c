@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:33:23 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/17 13:58:57 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 14:54:52 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,32 +111,3 @@ void	expand_pipeline_variables(t_pipeline *pipeline)
 		i++;
 	}
 }
-/*
-void	check_var(t_pipeline *pipeline)
-{
-	int		i;
-	int		j;
-	char	*expanded;
-
-	i = 0;
-	while (i < pipeline->n_cmds)
-	{
-		if (pipeline->cmds[i]->dollar)
-		{
-			j = 0;
-			while (pipeline->cmds[i]->args[j] != NULL)
-			{
-				if (ft_strchr(pipeline->cmds[i]->args[j], '$') &&
-					!pipeline->cmds[i]->quote_single)
-				{
-					expanded = expand_variables(pipeline->cmds[i]->args[j],
-												pipeline->my_env);
-					free(pipeline->cmds[i]->args[j]);
-					pipeline->cmds[i]->args[j] = expanded;
-				}
-				j++;
-			}
-		}
-		i++;
-	}
-} */

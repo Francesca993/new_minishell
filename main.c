@@ -6,7 +6,7 @@
 /*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:58:21 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/17 15:37:46 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/22 16:19:14 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	process_input_line(char *line, char ***env)
 	pipeline = parse_line(line, *env, pipeline);
 	if (!pipeline)
 		return (processing);
-	if (pipeline->cmds[0] != NULL)
+	if (pipeline->cmds && pipeline->n_cmds > 0 && pipeline->cmds[0])
 		processing = process_pipeline(pipeline, env);
 	free_pipeline(pipeline);
 	return (processing);

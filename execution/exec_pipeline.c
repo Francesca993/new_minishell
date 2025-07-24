@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:22:22 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/22 15:22:18 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/22 16:10:04 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	execute_cmd(t_pipeline *pipeline, int i, int **pipes)
 	cmd = pipeline->cmds[i];
 	setup_pipes(pipeline, i, pipes);
 	set_redirections(cmd);
+	if (set_redirections(cmd) == -1)
+		exit(1);
 	try_execute_builtin(cmd, &pipeline->my_env);
 	if (ft_strchr(cmd->args[0], '/'))
 	{

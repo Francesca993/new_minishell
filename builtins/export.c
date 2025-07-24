@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:03:02 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/13 22:04:15 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 14:52:01 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,72 +113,6 @@ static char	**add_new_var(char **my_env, const char *entry)
 	return (new_env);
 }
 
-/*
-** Trova la chiave (prima di '=' se presente)
-*/
-// char	*find_key(char *str)
-// {
-// 	char	*equal;
-// 	char	*key;
-
-// 	equal = ft_strchr(str, '=');
-// 	if (equal)
-// 		key = ft_substr(str, 0, equal - str);
-// 	else
-// 		key = ft_strdup(str);
-// 	return (key);
-// }
-
-// int	export_variable(char ***my_envp, char **args)
-// {
-// 	int		i;
-// 	char	*key;
-// 	char	*equal;
-// 	int		index;
-// 	char	**my_env;
-
-// 	i = 1;
-// 	my_env = *my_envp;
-// 	g_exit_status = 0;
-// 	if (!args[1])
-// 	{
-// 		print_export_buildin_sorted(my_env);
-// 		return (1);
-// 	}
-// 	while (args[i])
-// 	{
-// 		equal = ft_strchr(args[i], '=');
-// 		if (equal)
-// 			key = ft_substr(args[i], 0, equal - args[i]);
-// 		else
-// 			key = ft_strdup(args[i]);
-// 		if (!is_valid_identifier(key))
-// 		{
-// 			fprintf(stderr, "export: `%s`: not a valid identifier\n", args[i]);
-// 			g_exit_status = 1;
-// 			free(key);
-// 			i++;
-// 			continue ;
-// 		}
-// 		index = find_env_index(my_env, key);
-// 		if (index >= 0 && equal)
-// 		{
-// 			free(my_env[index]);
-// 			my_env[index] = ft_strdup(args[i]);
-// 		}
-// 		else if (index == -1)
-// 		{
-// 			if (equal)
-// 				my_env = add_new_var(my_env, args[i]);
-// 			else
-// 				my_env = add_new_var(my_env, args[i]);
-// 		}
-// 		free(key);
-// 		i++;
-// 	}
-// 	*my_envp = my_env;
-// 	return (1);
-// }
 static void	handle_export_arg(char ***my_envp, char *arg)
 {
 	char	*key;

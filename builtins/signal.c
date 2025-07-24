@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:50:36 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/17 15:40:16 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 14:52:44 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,3 @@ void	init_signals(void)
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
-
-/*
-**NEL MAIN**
-(!line)
-Ctrl-D → EOF (fine input)
-Non è un segnale, ma readline restituisce NULL
-Comportamento richiesto:
-Uscire dalla shell pulitamente
-*/

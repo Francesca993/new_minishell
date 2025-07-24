@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 22:23:22 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/22 15:50:39 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/22 17:21:42 by francesca        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ void	free_matrix(char **data)
 	free(data);
 }
 
+static void	free_cmd(t_cmd *cmd)
+{
+	if (cmd->args)
+		free_matrix(cmd->args);
+	free(cmd->infile);
+	free(cmd->outfile);
+	free(cmd);
+}
+
 void	free_pipeline(t_pipeline *pipeline)
 {
 	t_cmd	*cmd;
@@ -36,12 +45,11 @@ void	free_pipeline(t_pipeline *pipeline)
 	{
 		cmd = pipeline->cmds[i];
 		if (!cmd)
+		{
+			i++;
 			continue ;
-		if (cmd->args)
-			free_matrix(cmd->args);
-		free(cmd->infile);
-		free(cmd->outfile);
-		free(cmd);
+		}
+		free_cmd(cmd);
 		i++;
 	}
 	free(pipeline->cmds);

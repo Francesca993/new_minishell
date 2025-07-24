@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_var_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:23:20 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/17 13:55:29 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 14:54:41 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,40 +104,3 @@ char	*get_env_value(const char *var_name, char **env)
 		return (special);
 	return (find_env_value(var_name, env));
 }
-// Funzione per ottenere il valore di una variabile dall'ambiente
-// static char	*get_env_value(const char *var_name, char **env)
-// {
-// 	int		i;
-// 	int		len;
-// 	char	*value;
-// 	char	*tmp;
-// 	char	*ret;
-
-// 	if (!var_name || !env)
-// 		return (NULL);
-// 	if (ft_strlen(var_name) == 0)
-// 		return (ft_strdup(""));
-// 	if (ft_strcmp(var_name, "?") == 0)
-// 	{
-// 		tmp = ft_itoa(g_exit_status);
-// 		ret = ft_strdup(tmp);
-// 		free(tmp);
-// 		return (ret);
-// 	}
-// 	if (ft_strcmp(var_name, "0") == 0)
-// 		return (ft_strdup("minishell"));
-// 	if (ft_strcmp(var_name, "$") == 0)
-// 		return (ft_strdup("$"));
-// 	len = ft_strlen(var_name);
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		if (ft_strncmp(env[i], var_name, len) == 0 && env[i][len] == '=')
-// 		{
-// 			value = ft_strdup(env[i] + len + 1);
-// 			return (value);
-// 		}
-// 		i++;
-// 	}
-// 	return (ft_strdup(""));
-// }
