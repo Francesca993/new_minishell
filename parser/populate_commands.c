@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   populate_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:18:25 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/22 17:27:53 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 21:27:07 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ static void	handle_redir_in(t_pipeline *p, t_cmd *cmd, int *i)
 	if (cmd->infile)
 		free(cmd->infile);
 	cmd->infile = ft_strdup(p->tokens[++(*i)]);
+	if (!cmd->infile)
+	{
+		exit_shell(1, "Memory allocation failed\n");
+		return ;
+	}
 	cmd->redir_in = 1;
 }
 
@@ -69,16 +74,31 @@ void	handle_command_redirection(t_pipeline *p, t_cmd *cmd, int *i)
 	else if (type == REDIR_OUT)
 	{
 		cmd->outfile = ft_strdup(p->tokens[++(*i)]);
+		if (!cmd->outfile)
+		{
+			exit_shell(1, "Memory allocation failed\n");
+			return ;
+		}
 		cmd->redir_out = 1;
 	}
 	else if (type == APPEND)
 	{
 		cmd->outfile = ft_strdup(p->tokens[++(*i)]);
+		if (!cmd->outfile)
+		{
+			exit_shell(1, "Memory allocation failed\n");
+			return ;
+		}
 		cmd->append = 1;
 	}
 	else if (type == HEREDOC)
 	{
 		cmd->infile = ft_strdup(p->tokens[++(*i)]);
+		if (!cmd->infile)
+		{
+			exit_shell(1, "Memory allocation failed\n");
+			return ;
+		}
 		cmd->heredoc = 1;
 	}
 }

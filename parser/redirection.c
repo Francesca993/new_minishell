@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 16:06:07 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/24 13:40:42 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/24 21:30:09 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	setup_redir_in(t_cmd *cmd)
 	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
 	no_quotes = strip_outer_quotes(cmd->infile);
+	if (!no_quotes)
+	{
+		cmd->fd_in = -1;
+		return (-1);
+	}
 	fd = open(no_quotes, O_RDONLY);
 	free(no_quotes);
 	if (fd < 0)
@@ -39,6 +44,8 @@ int	setup_redir_out(t_cmd *cmd)
 	char	*no_quotes;
 
 	no_quotes = strip_outer_quotes(cmd->outfile);
+	if (!no_quotes)
+		return (-1);
 	fd = open(no_quotes, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	free(no_quotes);
 	if (fd < 0)
@@ -54,7 +61,10 @@ int	setup_redir_append(t_cmd *cmd)
 	char	*no_quotes;
 
 	no_quotes = strip_outer_quotes(cmd->outfile);
+	if (!no_quotes)
+		return (-1);
 	fd = open(no_quotes, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	free(no_quotes);
 	if (fd < 0)
 		return (perror(cmd->outfile), -1);
 	cmd->fd_out = fd;
@@ -95,6 +105,8 @@ int	setup_heredoc(t_cmd *cmd, char *delimiter)
 
 	new_del = NULL;
 	new_del = strip_outer_quotes(delimiter);
+	if (!new_del)
+		return (perror("Memory allocation failed"), -1);
 	exp_var = !ft_strcmp(new_del, delimiter);
 	if (pipe(pipe_fd) < 0)
 		return (perror("pipe heredoc"), -1);

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:50:36 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/24 14:52:44 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/24 20:39:45 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	handle_sigint(int signo)
 	(void)signo;
 	g_exit_status = 130;
 	write(1, "\n", 1);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }

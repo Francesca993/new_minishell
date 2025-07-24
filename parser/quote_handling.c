@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francesca <francesca@student.42.fr>        +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 07:43:42 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/06 13:58:32 by francesca        ###   ########.fr       */
+/*   Updated: 2025/07/24 21:28:02 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*strip_outer_quotes(const char *str)
 {
 	size_t	len;
 
+	if (!str)
+		return (NULL);
 	len = ft_strlen(str);
 	if (len >= 2 && ((str[0] == '\'' && str[len - 1] == '\'') || (str[0] == '"'
 				&& str[len - 1] == '"')))
