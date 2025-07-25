@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:50:36 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/24 20:39:45 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/25 10:27:06 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	handle_sigint(int signo)
 	(void)signo;
 	g_exit_status = 130;
 	write(1, "\n", 1);
-	//rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 08:01:34 by skayed            #+#    #+#             */
-/*   Updated: 2025/07/24 22:39:37 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/25 10:26:37 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ void	try_execute_builtin(t_cmd *cmd, char ***env)
 
 void	exec_with_env_path(t_cmd *cmd, char **env)
 {
-        char    *path;
-        char    *env_path;
+	char	*path;
+	char	*env_path;
 
-        env_path = find_path(env);
-        if (!env_path)
-        {
-                fprintf(stderr, "minishell: %s: No such file or directory\n",
-                        cmd->args[0]);
-                exit(127);
-        }
-        path = check_path(env_path, cmd->args[0]);
-        if (!path)
-                exit(127);
-        execve(path, cmd->args, env);
-        perror("execve");
-        free(path);
-        exit(1);
+	env_path = find_path(env);
+	if (!env_path)
+	{
+		fprintf(stderr, "minishell: %s: No such file or directory\n",
+			cmd->args[0]);
+		exit(127);
+	}
+	path = check_path(env_path, cmd->args[0]);
+	if (!path)
+		exit(127);
+	execve(path, cmd->args, env);
+	perror("execve");
+	free(path);
+	exit(1);
 }
 
 void	close_pipes(int **pipes, int n_pipes)

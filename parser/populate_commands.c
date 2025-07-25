@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   populate_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: fmontini <fmontini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:18:25 by francesca         #+#    #+#             */
-/*   Updated: 2025/07/24 21:27:07 by skayed           ###   ########.fr       */
+/*   Updated: 2025/07/25 10:33:21 by fmontini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,57 +49,12 @@ t_cmd	*allocate_cmd(t_pipeline *pipeline, int n_args)
 	return (cmd);
 }
 
-static void	handle_redir_in(t_pipeline *p, t_cmd *cmd, int *i)
+void	handle_pipe(t_pipeline *pipeline, t_cmd *cmd, int *i)
 {
-	if (cmd->infile)
-		free(cmd->infile);
-	cmd->infile = ft_strdup(p->tokens[++(*i)]);
-	if (!cmd->infile)
+	if (*i < pipeline->n_tokens && pipeline->types[*i] == PIPE)
 	{
-		exit_shell(1, "Memory allocation failed\n");
-		return ;
-	}
-	cmd->redir_in = 1;
-}
-
-void	handle_command_redirection(t_pipeline *p, t_cmd *cmd, int *i)
-{
-	t_token_type	type;
-
-	type = p->types[*i];
-	if ((*i + 1) >= p->n_tokens)
-		return ;
-	if (type == REDIR_IN)
-		handle_redir_in(p, cmd, i);
-	else if (type == REDIR_OUT)
-	{
-		cmd->outfile = ft_strdup(p->tokens[++(*i)]);
-		if (!cmd->outfile)
-		{
-			exit_shell(1, "Memory allocation failed\n");
-			return ;
-		}
-		cmd->redir_out = 1;
-	}
-	else if (type == APPEND)
-	{
-		cmd->outfile = ft_strdup(p->tokens[++(*i)]);
-		if (!cmd->outfile)
-		{
-			exit_shell(1, "Memory allocation failed\n");
-			return ;
-		}
-		cmd->append = 1;
-	}
-	else if (type == HEREDOC)
-	{
-		cmd->infile = ft_strdup(p->tokens[++(*i)]);
-		if (!cmd->infile)
-		{
-			exit_shell(1, "Memory allocation failed\n");
-			return ;
-		}
-		cmd->heredoc = 1;
+		cmd->pipe = 1;
+		(*i)++;
 	}
 }
 
